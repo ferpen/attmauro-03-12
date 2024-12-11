@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/12/2024 às 02:08
+-- Tempo de geração: 11/12/2024 às 02:14
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `leilao`
 --
-CREATE DATABASE IF NOT EXISTS `leilao` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `leilao`;
 
 -- --------------------------------------------------------
 
@@ -35,16 +33,17 @@ CREATE TABLE `itens` (
   `imagem` varchar(255) NOT NULL,
   `minimo` decimal(10,2) NOT NULL,
   `estado` enum('aberto','encerrado') DEFAULT 'aberto',
-  `vencedor` int(11) DEFAULT NULL
+  `vencedor` int(11) DEFAULT NULL,
+  `dono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `itens`
 --
 
-INSERT INTO `itens` (`id`, `nome`, `imagem`, `minimo`, `estado`, `vencedor`) VALUES
-(1, 'masqueico2', 'uploads/masqueico.jpg', 1.00, 'aberto', NULL),
-(3, 'feps', 'uploads/felps.jpg', 100000.00, 'aberto', NULL);
+INSERT INTO `itens` (`id`, `nome`, `imagem`, `minimo`, `estado`, `vencedor`, `dono`) VALUES
+(3, 'feps', 'uploads/felps.jpg', 100000.00, 'aberto', NULL, 0),
+(4, 'demongus', 'uploads/a.jpg', 12.00, 'aberto', NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -65,7 +64,12 @@ CREATE TABLE `lances` (
 
 INSERT INTO `lances` (`id`, `item_id`, `usuario_id`, `valor`) VALUES
 (2, 3, 5, 10000000.00),
-(3, 3, 6, 2154846.00);
+(3, 3, 6, 2154846.00),
+(4, 3, 6, 13.00),
+(5, 3, 6, 13123111.01),
+(6, 3, 6, 999999.00),
+(7, 4, 7, 14.00),
+(9, 4, 7, 123.00);
 
 -- --------------------------------------------------------
 
@@ -90,7 +94,10 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`) VALUES
 (3, 'asdglo', 'q46sjh@gmail.com', 'be6a53066e84ce244c80ab9329bda11f2578f26eee2520e469b2f1a444088040'),
 (4, 'sel', 'solar@gmail.com', '34d128f5b3dede622e107438fbefabdf0519ebab21ac7b6f2075f974d09ce524'),
 (5, 'gugu', '123fsdg@gmail', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
-(6, 'diogs', 'email@email', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
+(6, 'diogs', 'email@email', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
+(7, 'felas', 'anemos@email', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
+(8, 'fela', 'aneos@email', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
+(9, 'asdg', 'asdfg@email.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
 
 --
 -- Índices para tabelas despejadas
@@ -126,19 +133,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `itens`
 --
 ALTER TABLE `itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `lances`
 --
 ALTER TABLE `lances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para tabelas despejadas
